@@ -18,4 +18,14 @@ interface UserDao {
 
     @Update
     suspend fun update(user: User)
+
+    @Query("SELECT * FROM user_table")
+    fun getAllUsers(): kotlinx.coroutines.flow.Flow<List<User>>
+
+    @Query("SELECT * FROM user_table WHERE id = :id")
+    fun getUser(id: Int): kotlinx.coroutines.flow.Flow<User>
+
+    @androidx.room.Delete
+    suspend fun delete(user: User)
+
 }
